@@ -8,6 +8,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace PBJ_Helper
 {
@@ -132,9 +133,34 @@ namespace PBJ_Helper
                 sw.Write(lastProp.GetValue(item) + sw.NewLine);
             }
         }
+        [STAThread]
         static void Main(string[] args)
         {
-            ToJson(@"C:\Users\bbergstr\Documents\WorkBench\c#\LizTimeCard\timeCard2.xlsx", @"C:\Users\bbergstr\Documents\WorkBench\c#\LizTimeCard\pog.csv");
+            OpenFileDialog fileDialog = new OpenFileDialog
+            {
+                Multiselect = false,
+                Title = "Open Excel Document",
+                Filter = "Excel Document|*.xlsx;*.xls",
+                FilterIndex = 0,
+                RestoreDirectory = true
+            };
+
+            if(fileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string selectFileName = fileDialog.FileName;
+
+                SaveFileDialog saveDialog = new SaveFileDialog
+                {
+                    Filter = "CSV | *.csv*"
+                };
+
+                if(saveDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string saveFile = saveDialog.FileName + ".csv";
+                    ToJson(selectFileName, saveFile);
+                }
+            }
+
         }
     }
 }
