@@ -32,7 +32,6 @@ namespace PBJ_Helper
                     });
 
                     EmployeeWork currentEmployee = null;
-                    bool nextRowIsDates = false;
                     DataRow punchesRow = null;
                     DataRow lunchDeductionRow = null;
                     DataRow regRow = null;
@@ -59,7 +58,6 @@ namespace PBJ_Helper
                             //if row sunday contains value 'Sun', then the next row will be the dates
                             else if (row.ItemArray[3].ToString() == "Sun")
                             {
-                                nextRowIsDates = true;
                                 int manualRowIndex = 1; //if the row we are expecting is next, move the counter. otherwise assume this person does not have that row
                                 DataRow daysOfMonthRow = table.Rows[i + manualRowIndex];
                                 if(table.Rows[i + manualRowIndex + 1].ItemArray[1].ToString() == "Punches")
@@ -89,14 +87,12 @@ namespace PBJ_Helper
                                 employees.Add(new FullEmpoyeeOutput(currentEmployee));
                             }
                         }
-                        int derp = 3;
                     }
-
-                    //string csv = String.Join(",", employees.Select(x => x.ToString()).ToArray());
 
                     PropertyInfo[] properties = typeof(FullEmpoyeeOutput).GetProperties();
                     CreateCSV(employees, outputFileName);
 
+                    //to get a visual representation of what the dataset looks like, uncomment this code
                     //File.WriteAllText(
                     //    jsonFileName,
                     //    JsonConvert.SerializeObject(dataSet.Tables[0],
@@ -138,17 +134,7 @@ namespace PBJ_Helper
         }
         static void Main(string[] args)
         {
-            string wd = System.IO.Directory.GetCurrentDirectory();
-
             ToJson(@"C:\Users\bbergstr\Documents\WorkBench\c#\LizTimeCard\timeCard2.xlsx", @"C:\Users\bbergstr\Documents\WorkBench\c#\LizTimeCard\pog.csv");
-
-            //var csv = new List<string[]>(); // or, List<YourClass>
-            //var lines = System.IO.File.ReadAllLines(@"C:\Users\bbergstr\Documents\WorkBench\c#\LizTimeCard\timeCard.csv");
-            //foreach (string line in lines)
-            //    csv.Add(line.Split(',')); // or, populate YourClass          
-            //string json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(csv);
-
-            int derp = 5;
         }
     }
 }

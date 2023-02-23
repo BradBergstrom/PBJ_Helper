@@ -113,11 +113,6 @@ namespace PBJ_Helper
                 correctHours(daysWorked[i]);
                 totalWeekHours += daysWorked[i].correctedHours;
             }
-
-            calcWeek1Hours();
-            calcWeek2Hours();
-
-            int derp = 5;
         }
         public void correctHours(WorkDay day)
         {
