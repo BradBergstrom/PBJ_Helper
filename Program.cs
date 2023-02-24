@@ -114,7 +114,7 @@ namespace PBJ_Helper
             PropertyInfo[] properties = typeof(T).GetProperties();
             for (int i = 0; i < properties.Length - 1; i++)
             {
-                sw.Write(properties[i].Name + ",");
+                sw.Write(properties[i].Name + ";");
             }
             var lastProp = properties[properties.Length - 1].Name;
             sw.Write(lastProp + sw.NewLine);
@@ -127,7 +127,7 @@ namespace PBJ_Helper
                 for (int i = 0; i < properties.Length - 1; i++)
                 {
                     var prop = properties[i];
-                    sw.Write(prop.GetValue(item) + ",");
+                    sw.Write(prop.GetValue(item) + ";");
                 }
                 var lastProp = properties[properties.Length - 1];
                 sw.Write(lastProp.GetValue(item) + sw.NewLine);
